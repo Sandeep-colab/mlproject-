@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <style>
+        body {
+            background-color: rgb(34, 34, 34); /* Dark background */
+            color: rgb(230, 230, 230); /* Light text color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        form {
+            background-color: rgb(50, 50, 50); /* Slightly lighter dark for the form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px; /* Limit form width */
+            text-align: left; /* Align labels and inputs to the left within the form */
+        }
+
+        label {
+            display: block; /* Each label on its own line */
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: rgb(170, 200, 255); /* A soft blue for labels */
+        }
+
+        select, input[type="number"] {
+            width: calc(100% - 20px); /* Full width minus padding */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgb(80, 80, 80); /* Darker border */
+            border-radius: 5px;
+            background-color: rgb(60, 60, 60); /* Darker input background */
+            color: rgb(230, 230, 230); /* Light text in inputs */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: rgb(100, 150, 255); /* Highlight on focus */
+            box-shadow: 0 0 5px rgba(100, 150, 255, 0.5);
+        }
+
+        input[type="submit"] {
+            background-color: rgb(0, 128, 0); /* Green submit button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgb(0, 100, 0); /* Darker green on hover */
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: rgb(255, 215, 0); /* Gold color for results */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('predict_datapoints')}}" method="post">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+
+        <label for="ethnicity">Race/Ethnicity:</label>
+        <select id="ethnicity" name="ethnicity">
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select><br><br>
+
+        <label for="parental_level_of_education">Parental Level of Education:</label>
+        <select id="parental_level_of_education" name="parental_level_of_education">
+            <option value="bachelor's degree">Bachelor's Degree</option>
+            <option value="some college">Some College</option>
+            <option value="master's degree">Master's Degree</option>
+            <option value="associate's degree">Associate's Degree</option>
+            <option value="high school">High School</option>
+            <option value="some high school">Some High School</option>
+        </select><br><br>
+
+        <label for="lunch">Lunch:</label>
+        <select id="lunch" name="lunch">
+            <option value="standard">Standard</option>
+            <option value="free/reduced">Free/Reduced</option>
+        </select><br><br>
+
+        <label for="test_preparation_course">Test Preparation Course:</label>
+        <select id="test_preparation_course" name="test_preparation_course">
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select><br><br>
+
+        <label for="reading_score">Reading Score:</label>
+        <input type="number" id="reading_score" name="reading_score" required><br><br>
+
+        <label for="writing_score">Writing Score:</label>
+        <input type="number" id="writing_score" name="writing_score" required><br><br>
+
+        <input type="submit" value="Predict Math Score">
+    </form>
+
+    {% if results is defined %}
+        <h2>The prediction is {{ results }}</h2>
+    {% endif %}
+</body>
+</html>
