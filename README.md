@@ -57,7 +57,7 @@ project-root/
 
 1. **Clone the repo**:
 ```bash
-git clone https://github.com/your-username/student-performance-ml.git
+https://github.com/Sandeep-colab/mlproject-.git
 cd student-performance-ml
 
 
